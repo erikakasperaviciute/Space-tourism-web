@@ -712,8 +712,6 @@ body {
 
 /* technology layout */
 .grid-container--technology {
-
-    --flow-space: 0.25rem;
     grid-template-areas:
         'title'
         'image'
@@ -724,7 +722,7 @@ body {
 .grid-container--technology>picture {
     grid-area: image;
     width: 100%;
-    align-self: center;
+    align-self: start;
 }
 
 .grid-container--technology>.number-indicators {
