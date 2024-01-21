@@ -37,18 +37,16 @@ function changeTabFocus(e) {
       if (tabFocus >= tabs.length) {
         tabFocus = 0;
       }
-    }
-
-    if (e.key === "ArrowLeft") {
+    } else if (e.key === "ArrowLeft") {
       tabFocus--;
       if (tabFocus < 0) {
         tabFocus = tabs.length - 1;
       }
     }
-  }
 
-  tabs[tabFocus].setAttribute("tabindex", 0);
-  tabs[tabFocus].focus();
+    tabs[tabFocus].setAttribute("tabindex", 0);
+    tabs[tabFocus].focus();
+  }
 }
 
 function changeTabPanel(e) {
@@ -65,15 +63,33 @@ function changeTabPanel(e) {
 
   targetTab.setAttribute("aria-selected", true);
 
-  mainContainer
-    .querySelectorAll('[role="tabpanel"]')
-    .forEach((panel) => panel.setAttribute("hidden", true));
+  hideContent(mainContainer, '[role="tabpanel"]');
+  // pakeistas į funkciją hideContent
+  //   mainContainer
+  //     .querySelectorAll('[role="tabpanel"]')
+  //     .forEach((panel) => panel.setAttribute("hidden", true));
 
-  mainContainer.querySelector([`#${targetPanel}`]).removeAttribute("hidden");
+  showContent(mainContainer, [`#${targetPanel}`]);
+  // pakeistas į funkciją showContent
+  //   mainContainer.querySelector([`#${targetPanel}`]).removeAttribute("hidden");
 
-  mainContainer
-    .querySelectorAll("picture")
-    .forEach((picture) => picture.setAttribute("hidden", true));
+  hideContent(mainContainer, "picture");
+  // pakeistas į funkciją hideContent
+  //   mainContainer
+  //     .querySelectorAll("picture")
+  //     .forEach((picture) => picture.setAttribute("hidden", true));
 
-  mainContainer.querySelector([`#${targetImage}`]).removeAttribute("hidden");
+  showContent(mainContainer, [`#${targetImage}`]);
+  // pakeistas į funkciją showContent
+  //   mainContainer.querySelector([`#${targetImage}`]).removeAttribute("hidden");
+}
+
+function hideContent(parent, content) {
+  parent
+    .querySelectorAll(content)
+    .forEach((item) => item.setAttribute("hidden", true));
+}
+
+function showContent(parent, content) {
+  parent.querySelector(content).removeAttribute("hidden");
 }
